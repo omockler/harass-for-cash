@@ -1,0 +1,6 @@
+tmp
+.DS_Store
+.env
+mails
+dragonfly/
+dragonfly.log

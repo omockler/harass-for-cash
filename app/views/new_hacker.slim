@@ -1,0 +1,17 @@
+.panel.panel-default
+	.panel-heading
+		| New Hacker
+	.panel-body
+		form.form-horizontal role="form" action="/hackers" method="POST"
+			input type="hidden" name="qr" value="#{@qr}"
+			.form-group
+				label.control-label.col-sm-1 for="hacker-name" Name
+				.col-sm-5
+					input#hacker-name.form-control type="text" name="name" placeholder="Name"
+			.form-group
+				label.control-label.col-sm-1 for="hacker-email" Email
+				.col-sm-5
+					input#hacker-email.form-control type="email" name="email" placeholder="Email"
+			.form-group
+		    .col-sm-offset-1.col-sm-10
+		      button.btn.btn-default type="submit" Submit

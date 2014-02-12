@@ -1,0 +1,73 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    
+    title HarassForCash
+
+    link rel="stylesheet" type="text/css" href="#{asset_path 'layout.css'}"
+    script src="#{asset_path 'layout.js'}"
+
+    == yield_content :head
+
+  body
+    #container.container
+      nav.navbar.navbar-default.navbar-fixed-top role="navigation"
+        .container-fluid
+          .navbar-header
+            button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+              span class="sr-only" Toggle navigation
+              span class="icon-bar"
+              span class="icon-bar"
+              span class="icon-bar"
+            a class="navbar-brand" href="#" Harass For Cash
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            .nav.navbar-nav
+              li: a href="/events" Events
+              li: a href="#" Link
+              li.dropdown
+                a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  | Hackers 
+                  b.caret
+                ul.dropdown-menu
+                  li: a href="/hackers/current" Current Hackers
+                  li: a href="/hackers" All Hackers
+                  li: a href="#">Something else here
+                  li.divider
+                  li: a href="#" Separated link
+                  li.divider
+                  li: a href="#" One more separated link
+              li.dropdown
+                a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  | Codes 
+                  b.caret
+                ul.dropdown-menu
+                  li: a href="/codes/available" Available Codes
+                  li: a href="/codes/new" Generate Codes
+                  li: a href="/codes/print" Print Available Codes
+              li.dropdown
+                a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  | Raffles 
+                  b.caret
+                ul.dropdown-menu
+                  li: a href="/raffles/current" Current Raffle
+                  li: a href="/raffles" All Raffles
+                  li: a href="/raffles/current/draw" Draw Winner
+            ul.nav.navbar-nav.navbar-right
+              li: a href="#" Link
+              li.dropdown
+                a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  | Dropdown
+                  b.caret
+                ul.dropdown-menu
+                  li: a href="#" Action
+                  li: a href="#" Another action
+                  li: a href="#" Something else here
+                  li.divider
+                  li: a href="#" Separated link<
+      
+      .content
+        == yield

@@ -1,0 +1,33 @@
+.row
+  button.btn.btn-primary type="button" data-toggle="collapse" data-target="#new-event" Add Event
+
+.row
+  #new-event.panel.panel-default.collapse
+    .panel-heading
+      | New Event
+    .panel-body
+      form role="form" method="POST"
+        .form-group
+          label.sr-only for="event-name" Event Name
+          input#event-name.form-control name="name" type="text" placeholder="Event Name"
+        .form-group
+          label for="start-time" Start Time
+          input#start-time.form-control name="start_time" type="datetime-local"
+        .form-group
+          label for="end-time" End Time
+          input#end-time.form-control name="end_time" type="datetime-local"
+        .form-group
+          label for="interval" Raffle Interval
+          input#interval.form-control name="raffle_interval" type="number"
+        button.btn.btn-default type="submit" Create
+
+  .panel.panel-default
+    .panel-heading
+      | Events
+    ul.list-group
+      - @events.each do |event|
+        li.list-group-item 
+          - if Event.current == event
+            span.badge
+              span.glyphicon.glyphicon-star
+          = event.name
