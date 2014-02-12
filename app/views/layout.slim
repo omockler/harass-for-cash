@@ -70,4 +70,9 @@ html
                   li: a href="#" Separated link<
       
       .content
+        - flash_types.select { |kind| flash.has? kind }.each do |kind|
+          .alert.alert-dismissable class="alert-#{kind}"
+            button.close type="button" data-dismiss="alert" aria-hidden="true" &times;
+            strong ="#{kind.to_s.titleize}! "
+            = flash[kind]
         == yield

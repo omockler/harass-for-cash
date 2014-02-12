@@ -15,6 +15,7 @@ require 'active_support/core_ext/string'
 require 'active_support/core_ext/array'
 require 'active_support/core_ext/hash'
 require 'active_support/json'
+require 'rack-flash'
 
 libraries = Dir[File.expand_path('../lib/**/*.rb', __FILE__)]
 libraries.each do |path_name|
@@ -46,10 +47,12 @@ module HarassForCash
           secure: false,
           expire_after: 5.years,
           secret: ENV['SESSION_SECRET']
+      enable :sessions
     end
 
     use Rack::Deflater
     use Rack::Standards
+    use Rack::Flash, :sweep => true
 
     use Routes::Static
 
@@ -62,6 +65,7 @@ module HarassForCash
     use Routes::Hackers
     use Routes::Codes
     use Routes::Entries
+    use Routes::Raffles
   end
 end
 

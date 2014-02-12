@@ -13,6 +13,7 @@ gem 'json', '~> 1.7.7'
 gem 'dotenv'
 gem 'rqrcode_png'
 gem 'dragonfly'
+gem 'rack-flash3'
 
 # Assets
 gem 'sprockets'
