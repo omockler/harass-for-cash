@@ -3,18 +3,30 @@ module HarassForCash
     class Raffles < Base
 
       get '/raffles' do
-        Event.current.raffles
+        draw_closed_raffles
+        @event = Event.current
+        @raffles = @event.raffles
+        slim :raffles
       end
 
       get '/raffles/current' do
-        Event.current.raffles
-        Raffles.where(:drawn_at => nil)
+        draw_closed_raffles
+        @event = Event.current
+        @raffle = Event.current_raffle
+
+        slim :current_raffle
       end
 
-      get '/raffles/current/draw' do
+      private
 
-      end
-
+        def draw_closed_raffles
+          # TODO: Make sure no one wins twice
+          undrawn = Event.current.raffles.select { |r| r.end_time <= Time.now && !r.drawn }
+          undrawn.each do |r|
+            r.winner = r.entries.sample
+            r.drawn = true
+          end
+        end
     end
   end
 end

@@ -12,7 +12,6 @@ module HarassForCash
         enable :use_code
         
         Slim::Engine.default_options[:format] = :html5
-        Slim::Engine.default_options[:layout] = :layout
       end
 
       register Extensions::Assets

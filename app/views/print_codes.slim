@@ -1,3 +1,6 @@
-/ TODO: Needs some print love
-- @codes.each do |code|
-  img src="#{code.qr_code.url}"
+html
+  head
+    link rel="stylesheet" type="text/css" media="print" href="#{asset_path 'bootstrap.less'}"
+  body
+    - @codes.each do |code|
+      img style="height: 120px; width:120px" src="#{code.qr_code.url}"
