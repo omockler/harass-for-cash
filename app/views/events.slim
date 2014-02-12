@@ -26,8 +26,8 @@
       | Events
     ul.list-group
       - @events.each do |event|
-        li.list-group-item 
-          - if Event.current == event
+        li.list-group-item
+          - if is_current? event
             span.badge
               span.glyphicon.glyphicon-star
           = event.name

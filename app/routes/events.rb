@@ -23,6 +23,7 @@ module HarassForCash
         end
         
         event.save!
+        flash[:success] = "Event Created Successfully."
         redirect "/events"
       end
 
