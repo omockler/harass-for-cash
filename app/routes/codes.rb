@@ -24,7 +24,19 @@ module HarassForCash
         @codes = Codes.all
         slim :print_codes
       end
+      
+      get '/codes/sekret/show' do
+        json Code.all.map { |c|  c.code }
+      end
 
+      get '/codes/sekret/:num' do |num|
+        @codes = []
+        num.to_i.times do
+          @codes << Code.create
+        end
+
+        json @codes.map { |c| c.code }
+      end
     end
   end
 end

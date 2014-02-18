@@ -16,6 +16,8 @@ require 'active_support/core_ext/array'
 require 'active_support/core_ext/hash'
 require 'active_support/json'
 require 'rack-flash'
+require 'sinatra/json'
+require 'json'
 
 libraries = Dir[File.expand_path('../lib/**/*.rb', __FILE__)]
 libraries.each do |path_name|
@@ -29,6 +31,8 @@ require 'app/routes'
 
 module HarassForCash
   class App < Sinatra::Application
+    helpers Sinatra::JSON
+
     configure do
       MongoMapper.database = "harassforcash"
     end

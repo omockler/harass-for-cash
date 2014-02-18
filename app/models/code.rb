@@ -8,9 +8,8 @@ module HarassForCash
       key :qr_code_uid,   String
       
       dragonfly_accessor :qr_code
-      belongs_to :hacker
       
-      before_validation :update_qr_attr
+      before_create :update_qr_attr
 
       # TODO: get url from environment
       def update_qr_attr

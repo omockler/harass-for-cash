@@ -26,6 +26,7 @@ module HarassForCash
         if Hacker.create name: params[:name], email: params[:email], qr: code.code, event: Event.current
           code.destroy
           flash[:success] = "Hacker Created."
+          # TODO: Maybe Enter the hacker in a raffle if there is one in progress.
           redirect '/hackers/current'
         else
           flash[:danger] = "Something went wrong while trying to save the hacker. Try again."

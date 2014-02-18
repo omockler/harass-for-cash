@@ -35,4 +35,6 @@ gem 'bson_ext'
 group :development do
   gem 'thin'
   gem 'pry'
+  gem 'mechanize'
+  gem 'faker'
 end
