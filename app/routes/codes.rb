@@ -21,7 +21,7 @@ module HarassForCash
       end
       
       get '/codes/available/print' do
-        @codes = Codes.all
+        @codes = Code.all
         slim :print_codes
       end
       
@@ -36,6 +36,13 @@ module HarassForCash
         end
 
         json @codes.map { |c| c.code }
+      end
+
+      get '/codes/:code' do |code|
+        content_type 'image/png'
+        halt 404 unless Code.first(code: code).present?
+        image = RQRCode::QRCode.new("http://localhost:9292/enter/#{code}", :size => 14, :level => :h ).to_img
+        image.to_blob
       end
     end
   end

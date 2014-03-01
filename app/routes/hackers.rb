@@ -23,7 +23,8 @@ module HarassForCash
         code = Code.first code: params[:qr]
         halt 404 unless code
         
-        if Hacker.create name: params[:name], email: params[:email], qr: code.code, event: Event.current
+        new_hacker = Hacker.create name: params[:full_name], email: params[:email], qr: code.code, event: Event.current
+        if new_hacker.present?
           code.destroy
           flash[:success] = "Hacker Created."
           # TODO: Maybe Enter the hacker in a raffle if there is one in progress.

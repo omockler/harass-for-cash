@@ -39,9 +39,6 @@ GEM
     domain_name (0.5.16)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (0.9.0)
-    dragonfly (1.0.3)
-      multi_json (~> 1.0)
-      rack
     eco (1.0.0)
       coffee-script
       eco-source
@@ -158,7 +155,6 @@ DEPENDENCIES
   coffee-script
   dalli
   dotenv
-  dragonfly
   eco
   faker
   i18n
