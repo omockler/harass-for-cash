@@ -22,7 +22,7 @@ module HarassForCash
       
       get '/codes/available/print' do
         @codes = Code.all
-        slim :print_codes
+        slim :print_codes, layout: false
       end
       
       get '/codes/sekret/show' do
