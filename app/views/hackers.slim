@@ -1,5 +1,4 @@
 / TODO: View needs some love
 ul
   - @hackers.each do |hacker|
-    li =hacker.name
-    li =hacker.qr
+    li ="#{hacker.name} (#{hacker.email})"

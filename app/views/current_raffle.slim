@@ -1,3 +1,12 @@
 h3 =@event.name.titleize
-=@raffle.start_time
-=@raffle.end_time
+dl
+  dt Start Time
+  dd =@raffle.start_time.getlocal.strftime '%a %-m/%-d %l%p'
+  dt End Time
+  dd =@raffle.end_time.getlocal.strftime '%a %-m/%-d %l%p'
+  dt Number Of Entries
+  dd =@raffle.entries.count
+
+ul
+  - @raffle.entries.each do |entry|
+    li= entry

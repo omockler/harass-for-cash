@@ -8,6 +8,8 @@ module HarassForCash
       end
 
       post '/events' do
+        halt 500, "Bad interval" unless params[:raffle_interval].to_i > 0
+
         event = Event.new name: params[:name],
           start_time: Time.parse(params[:start_time]),
           end_time: Time.parse(params[:end_time]),
@@ -26,11 +28,6 @@ module HarassForCash
         flash[:success] = "Event Created Successfully."
         redirect "/events"
       end
-
-      get '/events/:id' do
-
-      end
-
     end
   end
 end

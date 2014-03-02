@@ -19,12 +19,26 @@ module HarassForCash
 
       private
 
+        def current_or_last_event
+          if Event.current.present?
+            Event.current
+          else
+            Event.where(:end_time.lte => Time.now).sort(:start_time).last
+          end
+        end
+
         def draw_closed_raffles
-          # TODO: Make sure no one wins twice
-          undrawn = Event.current.raffles.select { |r| r.end_time <= Time.now && !r.drawn }
+          winners = current_or_last_event.raffles.select { |r| r.drawn }.map { |r| r.winner }
+          undrawn = current_or_last_event.raffles.select { |r| r.end_time <= Time.now && !r.drawn }
           undrawn.each do |r|
-            r.winner = r.entries.sample
-            r.drawn = true
+            while !r.drawn do
+              potential_winner = r.entries.sample
+              unless winners.detect { |w| w == potential_winner["id"] }
+                r.winner = potential_winner
+                r.drawn = true
+              end
+            end
+            r.save
           end
         end
     end

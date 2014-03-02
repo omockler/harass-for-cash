@@ -4,7 +4,7 @@ module HarassForCash
       include MongoMapper::Document
 
       key :name,  String, required: true
-      key :email, String, required: true
+      key :email, String, required: true, unique: true
       key :qr,    String, required: true
       timestamps!
 

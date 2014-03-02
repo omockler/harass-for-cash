@@ -8,6 +8,6 @@ table.table.table-striped
   tbody
     - @raffles.each do |raffle|
       tr class=('success' if  is_current?(raffle))
-        td =raffle.start_time
-        td =raffle.end_time
-        td =raffle.winner
+        td =raffle.start_time.getlocal.strftime '%a %-m/%-d %l%p'
+        td =raffle.end_time.getlocal.strftime '%a %-m/%-d %l%p'
+        td =raffle.winner["email"] unless raffle.winner.blank?

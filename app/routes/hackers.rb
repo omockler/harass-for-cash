@@ -23,7 +23,7 @@ module HarassForCash
         code = Code.first code: params[:qr]
         halt 404 unless code
         
-        new_hacker = Hacker.create name: params[:full_name], email: params[:email], qr: code.code, event: Event.current
+        new_hacker = Hacker.create name: params[:full_name], email: params[:email], qr: code.code, event: current_or_next_event
         if new_hacker.present?
           code.destroy
           flash[:success] = "Hacker Created."
@@ -34,6 +34,16 @@ module HarassForCash
           redirect "/hackers/new/#{params[:qr]}"
         end
       end
+
+      private
+
+        def current_or_next_event
+          if Event.current.present?
+            Event.current
+          else
+            Event.where(:start_time.gte => Time.now).sort(:start_time).first
+          end
+        end
 
     end
   end

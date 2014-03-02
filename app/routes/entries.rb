@@ -13,7 +13,7 @@ module HarassForCash
         raffle = Event.current_raffle
         halt(500, "No Current Raffle") unless raffle
 
-        raffle.entries << hacker.id unless raffle.entries.include?(hacker.id)
+        raffle.entries << { id: hacker.id, email: hacker.email } unless raffle.entries.include?(hacker.id)
         raffle.save
 
         flash[:success] = "#{hacker.name} was entered in this raffle."
