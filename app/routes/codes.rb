@@ -41,7 +41,7 @@ module HarassForCash
       get '/codes/:code' do |code|
         content_type 'image/png'
         halt 404 unless Code.first(code: code).present?
-        image = RQRCode::QRCode.new("http://localhost:9292/enter/#{code}", :size => 14, :level => :h ).to_img
+        image = RQRCode::QRCode.new("#{ENV['URL']}/enter/#{code}", :size => 14, :level => :h ).to_img
         image.to_blob
       end
     end
