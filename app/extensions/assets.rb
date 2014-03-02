@@ -17,7 +17,7 @@ module HarassForCash
         app.set :assets, assets = Sprockets::Environment.new(app.settings.root)
 
         assets.append_path('app/assets/javascripts')
-        assets.append_path('app/assets/stylesheets')
+        assets.append_path('app/assets/stylesheets/layout.css.less')
         assets.append_path('app/assets/images')
         assets.append_path('vendor/assets/javascripts')
         assets.append_path('vendor/assets/stylesheets')
@@ -29,7 +29,8 @@ module HarassForCash
         end
 
         app.configure :production do
-          assets.cache          = Sprockets::Cache::MemcacheStore.new
+          assets.cache = Sprockets::Cache::FileStore.new('./tmp')
+          #assets.cache          = Sprockets::Cache::MemcacheStore.new
           assets.js_compressor  = Closure::Compiler.new
           assets.css_compressor = YUI::CssCompressor.new
         end
