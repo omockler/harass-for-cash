@@ -35,6 +35,7 @@ module HarassForCash
 
     configure do
       db = URI.parse(ENV['MONGOHQ_URL'])
+      puts db
       db_name = db.path.gsub(/^\//, '')
       MongoMapper.connection = Mongo::Connection.new(db.host, db.port).db(db_name)
       MongoMapper.database = "harassforcash"
