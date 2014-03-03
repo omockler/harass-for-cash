@@ -17,7 +17,7 @@ module HarassForCash
         app.set :assets, assets = Sprockets::Environment.new(app.settings.root)
 
         assets.append_path('app/assets/javascripts')
-        assets.append_path('app/assets/stylesheets/layout.css.less')
+        assets.append_path('app/assets/stylesheets')
         assets.append_path('app/assets/images')
         assets.append_path('vendor/assets/javascripts')
         assets.append_path('vendor/assets/stylesheets')

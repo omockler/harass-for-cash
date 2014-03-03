@@ -34,7 +34,10 @@ module HarassForCash
     helpers Sinatra::JSON
 
     configure do
-      MongoMapper.database = "harassforcash"
+      db_config = YAML::load(File.read( "./config/database.yml"))
+      mongo = db_config[ENV["RACK_ENV"]]
+      MongoMapper.connection = Mongo::Connection.new(mongo['hostname'])
+      MongoMapper.database = mongo['database']
     end
 
     configure :development, :staging do
