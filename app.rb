@@ -37,7 +37,7 @@ module HarassForCash
       db = URI.parse(ENV['MONGOHQ_URL'])
       db_name = db.path.gsub(/^\//, '')
       conn = Mongo::Connection.new(db.host, db.port)
-      conn.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
+      conn.db(db_name).authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
       MongoMapper.connection = conn
       MongoMapper.database = db_name
     end
