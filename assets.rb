@@ -10,8 +10,8 @@ module HarassForCash
       serve '/js',      :from => 'app/js'
 
       js :main, "/js/main.js", [
-        "http://code.jquery.com/jquery.min.js",
-        "http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+        "/js/jquery.min.js",
+        "/js/bootstrap.min.js"
       ]
       css :main, "/css/main.css", [
         "/css/bootstrap.css",
