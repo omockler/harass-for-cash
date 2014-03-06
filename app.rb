@@ -18,7 +18,7 @@ require 'active_support/json'
 require 'rack-flash'
 require 'sinatra/json'
 require 'json'
-require 'pry'
+
 require 'app/models'
 require 'app/helpers'
 require 'app/routes'
