@@ -1,9 +1,8 @@
-#!/usr/bin/env rake
+# Rakefile
+APP_FILE  = 'app.rb'
+APP_CLASS = 'HarassForCash::App'
 
-task :app do
-  require './app'
-end
+# For Padrino users, do not forget to add your application namspace
+# APP_CLASS = '<Project>::App'
 
-Dir[File.dirname(__FILE__) + "/lib/tasks/*.rb"].sort.each do |path|
-  require path
-end
+require 'sinatra/assetpack/rake'

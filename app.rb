@@ -18,20 +18,18 @@ require 'active_support/json'
 require 'rack-flash'
 require 'sinatra/json'
 require 'json'
-
-libraries = Dir[File.expand_path('../lib/**/*.rb', __FILE__)]
-libraries.each do |path_name|
-  require path_name
-end
-
-require 'app/extensions'
+require 'pry'
 require 'app/models'
 require 'app/helpers'
 require 'app/routes'
+require './assets'
 
 module HarassForCash
-  class App < Sinatra::Application
+  class App < Sinatra::Base
+    set :root, File.dirname(__FILE__)
+
     helpers Sinatra::JSON
+    helpers Helpers
 
     configure do
       db = URI.parse(ENV['MONGOHQ_URL'])
@@ -40,13 +38,7 @@ module HarassForCash
       conn.db(db_name).authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
       MongoMapper.connection = conn
       MongoMapper.database = db_name
-    end
-
-    configure :development, :staging do
-      #database.loggers << Logger.new(STDOUT)
-    end
-
-    configure do
+    
       disable :method_override
       disable :static
 
@@ -57,24 +49,12 @@ module HarassForCash
           expire_after: 5.years,
           secret: ENV['SESSION_SECRET']
       enable :sessions
+      Slim::Engine.default_options[:format] = :html5
     end
 
     use Rack::Deflater
     use Rack::Standards
     use Rack::Flash, :sweep => true
-
-    use Routes::Static
-
-    unless settings.production?
-      use Routes::Assets
-    end
-
-    # Other routes:
-    use Routes::Events
-    use Routes::Hackers
-    use Routes::Codes
-    use Routes::Entries
-    use Routes::Raffles
   end
 end
 
