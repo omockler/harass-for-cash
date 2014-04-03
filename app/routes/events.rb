@@ -1,4 +1,3 @@
-require 'pry'
 module HarassForCash
   class App < Sinatra::Base
 

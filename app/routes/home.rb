@@ -1,4 +1,3 @@
-require 'pry'
 module HarassForCash
   class App < Sinatra::Base
 
@@ -7,7 +6,6 @@ module HarassForCash
       if @event.present?
         # This doesn't account for the event starting in the future
         @next_raffle = @event.raffles.first { |r| r.start_time > Time.now.utc && r.end_time < Time.now.utc }
-        binding.pry
       end
       slim :home
     end
