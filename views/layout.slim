@@ -46,8 +46,8 @@ html
                 ul.dropdown-menu
                   li: a href="/raffles/current" Current Raffle
                   li: a href="/raffles" All Raffles
-                  li: a href="/raffles/current/draw" Draw Winner
-      
+              li: a href="/users" Users
+              
       .content
         - flash_types.select { |kind| flash.has? kind }.each do |kind|
           .alert.alert-dismissable class="alert-#{kind}"

@@ -5,5 +5,6 @@ module HarassForCash
     autoload :Hacker,   'app/models/hacker'
     autoload :Code,     'app/models/code'
     autoload :Raffle,   'app/models/raffle'
+    autoload :User,     'app/models/user'
   end
 end
