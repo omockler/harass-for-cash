@@ -3,7 +3,7 @@ module HarassForCash
     
     def is_current? item
       if item.respond_to?(:start_time) && item.respond_to?(:end_time)
-        item.start_time <= Time.now && item.end_time >= Time.now
+        item.start_time <= Time.now.utc && item.end_time >= Time.now.utc
       end
     end
 

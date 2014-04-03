@@ -1,3 +1,4 @@
+require 'pry'
 module HarassForCash
   class App < Sinatra::Base
 
@@ -10,8 +11,8 @@ module HarassForCash
       halt 500, "Bad interval" unless params[:raffle_interval].to_i > 0
 
       event = Event.new name: params[:name],
-        start_time: Time.parse(params[:start_time]),
-        end_time: Time.parse(params[:end_time]),
+        start_time: Time.parse(params[:start_time]).utc,
+        end_time: Time.parse(params[:end_time]).utc,
         raffle_interval: params[:raffle_interval].to_i
       
       num_raffles = ((event.end_time - event.start_time) / event.raffle_interval.hours).ceil

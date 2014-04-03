@@ -4,11 +4,11 @@ module HarassForCash
       include MongoMapper::Document
 
       def self.current
-        first(:start_time.lte => Time.now, :end_time.gte => Time.now)
+        first(:start_time.lte => Time.now.utc, :end_time.gte => Time.now.utc)
       end
 
       def self.current_raffle
-        current.raffles.select { |r| r.start_time <= Time.now && r.end_time >= Time.now }.first
+        current.raffles.select { |r| r.start_time <= Time.now.utc && r.end_time >= Time.now.utc }.first
       end
 
       key :name,            String
