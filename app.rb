@@ -11,6 +11,7 @@ Dotenv.load
 
 # Require base
 require 'sinatra/base'
+require 'warden'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/array'
 require 'active_support/core_ext/hash'
@@ -26,6 +27,7 @@ require './assets'
 
 module HarassForCash
   class App < Sinatra::Base
+
     set :root, File.dirname(__FILE__)
 
     helpers Sinatra::JSON
@@ -42,19 +44,43 @@ module HarassForCash
       disable :method_override
       disable :static
 
-      set :sessions,
-          httponly: true,
-          secure: production?,
-          secure: false,
-          expire_after: 5.years,
-          secret: ENV['SESSION_SECRET']
-      enable :sessions
       Slim::Engine.default_options[:format] = :html5
     end
 
+    use Rack::Session::Cookie, secret: (ENV["SESSION_SECRET"] || "nothingissecretontheinternet")
     use Rack::Deflater
     use Rack::Standards
     use Rack::Flash, :sweep => true
+
+    use Warden::Manager do |manager|
+      manager.default_strategies :password
+      manager.failure_app = App
+      manager.serialize_into_session { |user| user.id }
+      manager.serialize_from_session { |id| User.first id: id }
+    end
+     
+    Warden::Manager.before_failure do |env,opts|
+      env['REQUEST_METHOD'] = 'POST'
+    end
+
+    Warden::Strategies.add(:password) do
+      def valid?
+        params["email"] || params["password"]
+      end
+     
+      def authenticate!
+        user = User.first email: params["email"]
+        if user and user.authenticate(params["password"])
+          success!(user)
+        else
+          fail!("Could not log in")
+        end
+      end
+    end
+
+    before /^(?!\/(login|\/|js|css|favicon|fonts))/ do
+      check_authentication
+    end
   end
 end
 

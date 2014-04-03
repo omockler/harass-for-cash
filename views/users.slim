@@ -1,0 +1,22 @@
+.row
+  button.btn.btn-primary type="button" data-toggle="collapse" data-target="#new-user" Add User
+
+.row
+  #new-user.panel.panel-default.collapse
+    .panel-heading New User
+    .panel-body
+      form role="form" method="POST"
+        .form-group
+          label.sr-only for="email" User Email
+          input#email.form-control name="email" type="text" placeholder="User Email"
+        .form-group
+          label for="password"
+          input#password.form-control name="password" type="password" placeholder="Password"
+        button.btn.btn-default type="submit" Create
+
+  .panel.panel-default
+    .panel-heading Users
+    ul.list-group
+      - @users.each do |user|
+        li.list-group-item
+          = user.email

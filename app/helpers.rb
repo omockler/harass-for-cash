@@ -11,5 +11,16 @@ module HarassForCash
       [:success, :info, :warning, :danger]
     end
 
+    def warden
+      env["warden"]
+    end
+
+    def check_authentication
+      redirect '/login' unless warden.authenticated?
+    end
+
+    def current_user
+      warden.user
+    end
   end
 end

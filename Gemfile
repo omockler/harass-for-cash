@@ -25,6 +25,9 @@ gem 'therubyracer', platforms: :ruby
 gem 'mongo_mapper', "~> 0.13.0.beta2"
 gem 'bson_ext'
 
+gem 'warden'
+gem 'bcrypt-ruby'
+
 group :development do
   gem 'thin'
   gem 'pry'

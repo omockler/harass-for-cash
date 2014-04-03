@@ -6,4 +6,6 @@ module HarassForCash
   require 'app/routes/raffles'
   require 'app/routes/hackers'
   require 'app/routes/codes'
+  require 'app/routes/auth'
+  require 'app/routes/users'
 end
