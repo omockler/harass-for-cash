@@ -1,1 +1,6 @@
-h1 Welcome To Harass For Cash!!
+#home
+  p.text-center
+    h1 Welcome To Harass For Cash!!
+    -if @event.present?
+      p.lead
+        = "Next Drawing at #{@next_raffle.end_time}"

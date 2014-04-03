@@ -27,5 +27,10 @@ module HarassForCash
       flash[:success] = "Event Created Successfully."
       redirect "/events"
     end
+
+    get '/event/:id' do |id|
+      @event = Event.first id: id
+      slim :event
+    end
   end
 end

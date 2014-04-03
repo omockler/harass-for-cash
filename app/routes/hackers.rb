@@ -1,6 +1,7 @@
 module HarassForCash
   class App < Sinatra::Base
-    
+    include Helpers
+
     get '/hackers' do
       @hackers = Hacker.all
       slim :hackers
@@ -26,7 +27,7 @@ module HarassForCash
       if new_hacker.present?
         code.destroy
         flash[:success] = "Hacker Created."
-        # TODO: Maybe Enter the hacker in a raffle if there is one in progress.
+        enter_hacker new_hacker
         redirect '/hackers/current'
       else
         flash[:danger] = "Something went wrong while trying to save the hacker. Try again."
@@ -35,8 +36,20 @@ module HarassForCash
     end
 
     private
+      def enter_hacker(hacker)
+        raffle = current_or_next_event.raffles.detect { |r| is_current?(r) }
+        raffle ||= current_or_next_event.raffles.where(:start_time.gte => Time.now).sort(:start_time).first
+        unless raffle.entries.any? { |h| h["id"] == hacker.id}
+          raffle.entries << { id: hacker.id, email: hacker.email } 
+          raffle.save
+        end
+      end
 
       def current_or_next_event
+        @event ||= get_current_or_next_event
+      end
+
+      def get_current_or_next_event
         if Event.current.present?
           Event.current
         else

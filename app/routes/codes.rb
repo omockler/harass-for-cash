@@ -4,7 +4,7 @@ module HarassForCash
     get '/codes/available' do
       # TODO: Implement View
       @codes = Code.all
-      slim :codes
+      slim :print_codes, layout: false
     end
     
     get '/codes/new' do

@@ -2,7 +2,7 @@ module HarassForCash
   class App < Sinatra::Base
 
     get '/entries' do
-      @entries = Hacker.find Event.current_raffle.entries
+      @entries = Event.current_raffle.entries
       slim :entries
     end
 
@@ -11,9 +11,11 @@ module HarassForCash
 
       raffle = Event.current_raffle
       halt(500, "No Current Raffle") unless raffle
-
-      raffle.entries << { id: hacker.id, email: hacker.email } unless raffle.entries.include?(hacker.id)
-      raffle.save
+      
+      unless raffle.entries.any? { |h| h["id"] == hacker.id}
+        raffle.entries << { id: hacker.id, email: hacker.email } 
+        raffle.save
+      end
 
       flash[:success] = "#{hacker.name} was entered in this raffle."
       redirect '/entries'

@@ -28,7 +28,7 @@ module HarassForCash
 
       def draw_closed_raffles
         winners = current_or_last_event.raffles.select { |r| r.drawn }.map { |r| r.winner }
-        undrawn = current_or_last_event.raffles.select { |r| r.end_time <= Time.now && !r.drawn }
+        undrawn = current_or_last_event.raffles.select { |r| r.end_time <= Time.now && !r.drawn && r.entries.count > 0 }
         undrawn.each do |r|
           while !r.drawn do
             potential_winner = r.entries.sample

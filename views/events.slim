@@ -30,4 +30,4 @@
           - if is_current? event
             span.badge
               span.glyphicon.glyphicon-star
-          = event.name
+          a href="/event/#{event.id}" = event.name
