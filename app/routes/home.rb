@@ -5,7 +5,7 @@ module HarassForCash
       @event = current_or_next_event
       if @event.present?
         # This doesn't account for the event starting in the future
-        @next_raffle = @event.raffles.first { |r| r.start_time > Time.now.utc && r.end_time < Time.now.utc }
+        @next_raffle = @event.raffles.detect { |r| r.start_time < Time.now.utc && r.end_time > Time.now.utc }
       end
       slim :home
     end
