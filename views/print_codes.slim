@@ -4,8 +4,16 @@ html
     title HTML & CSS Avery Labels (5160) by MM at Boulder Information Services
     == css :print
   body
-    - @codes.each_index do |index|
+    .page
       .label
-        img src=src="/codes/#{@codes[index].code}"
-      - if (index + 1) % 25 == 0
-        .page-break
+        - @codes.each_with_index do |code, index|
+          - if index > 0 and index % 16 == 0
+            </div></div>
+            <div class="page"><div class="label">
+          - if index > 0 and (index % 16 != 0) and (index % 2 == 0)
+            </div>
+            <div class="label">
+          .code
+            /= code.code
+            .align
+              img src=src="/codes/#{code.code}"
