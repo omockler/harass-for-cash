@@ -69,7 +69,7 @@ module HarassForCash
       end
      
       def authenticate!
-        user = User.first email: params["email"]
+        user = User.first email: params["email"].lowercase
         if user and user.authenticate(params["password"])
           success!(user)
         else

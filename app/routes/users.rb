@@ -8,7 +8,7 @@ module HarassForCash
 
     post '/users' do
       begin
-        user = User.create! email: params["email"], password: params["password"], password_confirmation: params["password"]
+        user = User.create! email: params["email"].lowercase, password: params["password"], password_confirmation: params["password"]
         flash[:success] = "#{user.email} was entered in this raffle."
       rescue
         flash[:error] = "Could not create user"  
