@@ -1,13 +1,13 @@
 .panel.panel-default
-	.panel-heading
-		| New Hacker
-	.panel-body
-		form.form-horizontal role="form" action="/hackers" method="POST"
-			input type="hidden" name="qr" value="#{@qr}"
-			.form-group
-				label.control-label.col-sm-1 for="hacker-name" Name
-				.col-sm-5
-					input#hacker-name.form-control type="text" name="full_name" placeholder="Name"
+  .panel-heading
+    | New Hacker
+  .panel-body
+    form.form-horizontal role="form" action="/hackers" method="POST"
+      input type="hidden" name="qr" value="#{@qr}"
+      .form-group
+        label.control-label.col-sm-1 for="hacker-name" Name
+        .col-sm-5
+          input#hacker-name.form-control type="text" name="full_name" placeholder="Name"
       .form-group
         label.control-label.col-sm-1 for="hacker-email" Email
         .col-sm-5
@@ -19,7 +19,7 @@
       .form-group
         label.control-label.col-sm-1 for="School" School
         .col-sm-5
-          input#school.form-control type="text" name="school" placeholder="Name of School"			
-			.form-group
-		    .col-sm-offset-1.col-sm-10
-		      button.btn.btn-default type="submit" Submit
+          input#school.form-control type="text" name="school" placeholder="Name of School"      
+      .form-group
+        .col-sm-offset-1.col-sm-10
+          button.btn.btn-default type="submit" Submit
