@@ -40,7 +40,7 @@ module HarassForCash
         raffle = current_or_next_event.raffles.detect { |r| is_current?(r) }
         raffle ||= current_or_next_event.raffles.where(:start_time.gte => Time.now.utc).sort(:start_time).first
         unless raffle.entries.any? { |h| h["id"] == hacker.id}
-          raffle.entries << { id: hacker.id, email: hacker.email } 
+          raffle.entries << { id: hacker.id, email: hacker.email, phone: hacker.phone } 
           raffle.save
         end
       end

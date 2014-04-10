@@ -10,4 +10,6 @@ table.table.table-striped
       tr class=('success' if  is_current?(raffle))
         td =raffle.start_time.getlocal.strftime '%a %-m/%-d %l%p'
         td =raffle.end_time.getlocal.strftime '%a %-m/%-d %l%p'
-        td =raffle.winner["email"] unless raffle.winner.blank?
+        td 
+         -unless raffle.winner.blank?
+          ="#{raffle.winner["email"]} - #{raffle.winner["phone"]}

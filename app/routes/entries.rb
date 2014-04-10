@@ -13,7 +13,7 @@ module HarassForCash
       halt(500, "No Current Raffle") unless raffle
       
       unless raffle.entries.any? { |h| h["id"] == hacker.id}
-        raffle.entries << { id: hacker.id, email: hacker.email } 
+        raffle.entries << { id: hacker.id, email: hacker.email, phone: hacker.phone } 
         raffle.save
       end
 
