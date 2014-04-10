@@ -9,4 +9,4 @@ dl
 
 ul
   - @raffle.entries.each do |entry|
-    li= entry["email"]
+    li= "#{entry["email"]} - #{entry["phone"]}"
