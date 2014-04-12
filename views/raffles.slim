@@ -14,4 +14,4 @@ table.table.table-striped
           =raffle.end_time.getlocal.strftime('%a %-m/%-d %l%p')
         td 
          -unless raffle.winner.blank?
-          =raffle.winner["email"]
+          = "Email: #{raffle.winner["email"]} | Phone: #{raffle.winner["phone"]}"
